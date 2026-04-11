@@ -5,8 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fluxogram"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="720" Width="1080">
+    
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#5B1094" Offset="0"/>
+                <GradientStop Color="#708AEF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0">
+            <StackPanel>
+                <Button Content="Criar novo fluxograma" Background="Transparent" 
+                        BorderThickness="0" Margin="20, 50, 20, 0" Padding="10">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#40A9A9A9"/>
+                            <Setter Property="Foreground" Value="White"/>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#40A9A9A9"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+
+
+                <Button Content="Carregar Fluxograma" Background="Transparent" 
+                        BorderThickness="0" Margin="20, 20, 20, 0" Padding="10">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#40A9A9A9"/>
+                            <Setter Property="Foreground" Value="White"/>
+
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#40A9A9A9"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" Background="White" Opacity="0.25"/>
     </Grid>
+
 </Window>
