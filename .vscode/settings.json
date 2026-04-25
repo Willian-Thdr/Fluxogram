@@ -1,0 +1,7 @@
+{
+    "emmet.includeLanguages": {
+        "xaml": "xml"
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "editor.formatOnSave": true
+}
