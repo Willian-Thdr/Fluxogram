@@ -73,21 +73,6 @@
                                 VerticalAlignment="Top"/>
                         </Grid>
                     </TabItem>
-
-                    <TabItem Header="Projeto 1" Width="67" Height="24" FontSize="14" 
-                        Margin="5, 0, 0, 0" HorizontalAlignment="Center" Opacity="0.5">
-                        <Grid>
-                            <Label Content="Projeto 1"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Top"/>
-
-                            <Grid.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Criar novo objeto"/>
-                                </ContextMenu>
-                            </Grid.ContextMenu>
-                        </Grid>
-                    </TabItem>
                 </TabControl>
             </Border>
         </Grid>

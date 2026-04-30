@@ -17,12 +17,12 @@ public partial class MainWindow : Window
         Loaded += (s, e) =>
         {
             List<Button> buttons = GetAllChildrenButton<Button>(this); // Crio uma lista para receber todos os botões da interface
-            List<TabItem> newTabs = GetAllChildrenTab<TabItem>(this);
+            List<TabItem> tabs = GetAllChildrenTab<TabItem>(this);
             new StyleButtonCode(buttons); // Chamo o método que aplica modificação ao botão
-            new RenameTab(newTabs); // Chamo método que permite modificar as abas que já estão por padrão no programa
+            new RenameTab(tabs); // Chamo método que permite modificar as abas que já estão por padrão no programa
 
             // Chamo o método de criar novas abas. (Ele recebe o valor do comando do botão pressionado, O nome do TabControl)
-            CreateNewFlux.Connect(CreateFlux, Abas);
+            CreateNewFlux.Connect(CreateFlux, Abas, tabs);
         };
     }
 
