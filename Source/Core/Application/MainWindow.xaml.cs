@@ -22,7 +22,7 @@ public partial class MainWindow : Window
             new RenameTab(tabs); // Chamo método que permite modificar as abas que já estão por padrão no programa
 
             // Chamo o método de criar novas abas. (Ele recebe o valor do comando do botão pressionado, O nome do TabControl)
-            CreateNewFlux.Connect(CreateFlux, Abas, tabs);
+            CreateNewTab.Connect(CreateFlux, Abas, tabs);
         };
     }
 

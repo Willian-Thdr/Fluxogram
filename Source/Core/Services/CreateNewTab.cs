@@ -4,11 +4,10 @@ using System.Windows.Controls;
 
 namespace Fluxogram.Core.Services;
 
-public static class CreateNewFlux
+public static class CreateNewTab
 {
     public static void Connect(Button button, TabControl abas, List<TabItem> items)
     {
-        List<int> numerator = new List<int>(); // Lista que enumera quantas abas foram criadas
         List<TabItem> tabList = new List<TabItem>(); // Listas que receberá todos os ids de todas as abas
         int num = 0; // Numerdor do total de abas
 
@@ -16,9 +15,8 @@ public static class CreateNewFlux
         button.Click += (s, e) =>
         {
             num++; // Aumento o numerador em 1
-            numerator.Add(num); // Adiciono o numerador à lista
             string idName = "Fluxograma_" + num; // Nomeio o id da aba a partir de sua numeração
-            string tabName = "Fluxograma " + numerator.Count; // Nomeio a aba a partir de sua numeração
+            string tabName = "Novo Fluxograma"; // Nomeio a aba a partir de sua numeração
 
             TabItem novaAba = new TabItem(); // Item que cria nova aba
 

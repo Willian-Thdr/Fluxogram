@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 public class CloseTabSystem
 {
-    public CloseTabSystem(List<TabItem> tabItems, TabControl abas, StackPanel header, TabItem novaAba)
+    public CloseTabSystem(TabControl abas, StackPanel header, TabItem novaAba)
     {
         List<TabItem> tabList = new List<TabItem>(); // Listas que receberá todos os ids de todas as abas
         List<TabItem> itemList = new List<TabItem>();

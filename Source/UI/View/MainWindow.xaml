@@ -12,10 +12,7 @@
     
         <Grid>
             <Grid.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#5B1094" Offset="0"/>
-                    <GradientStop Color="#708AEF" Offset="1"/>
-                </LinearGradientBrush>
+                <SolidColorBrush Color="#FFFFFF"/>
             </Grid.Background>
 
             <Grid.ColumnDefinitions>
@@ -30,33 +27,24 @@
                         <SolidColorBrush Color="#40B3B3B3"/>
                     </StackPanel.Background>
 
-                    <Button x:Name="CreateFlux" Content="Criar novo fluxograma" Background="Transparent" 
-                            BorderThickness="0" Margin="20, 50, 20, 0" Padding="10">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding  BorderBrush}"
-                                        BorderThickness="{TemplateBinding  BorderThickness}"
-                                        Padding="{TemplateBinding Padding}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-
-                    <Button x:Name="LoadFlux" Content="Carregar Fluxograma" Background="Transparent" 
-                            BorderThickness="0" Margin="20, 20, 20, 0" Padding="10">
-                        <Button.Template>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding  Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        Padding="{TemplateBinding Padding}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                    <Grid Width="220" Height="50" Margin="0, 0, 0, 0">
+                        <Label Content="Menu" Width="60" Height="32" 
+                               Margin="10, 0, 0, 0" FontSize="20" HorizontalAlignment="Left"/>
+                            
+                        <Button x:Name="MenuButton" Content="≡" Margin="0, 6, 10, 0" Width="26" Height="26"
+                                FontSize="15" HorizontalAlignment="Right" Background="Transparent">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
                 </StackPanel>
             </Border>
 
@@ -66,11 +54,45 @@
                 <TabControl Background="#20FFFFFF" BorderBrush="Transparent" BorderThickness="0" x:Name="Abas">
                     <TabItem Header="Menu" Width="50" Height="24" FontSize="14" 
                         Background="#FFFFFF" BorderBrush="Black" Opacity="0.5"
-                        BorderThickness="1" Margin="5, 0, 0, 0" HorizontalAlignment="Center" x:Name="NaoEditavel">
+                        BorderThickness="0" Margin="5, 0, 0, 0" HorizontalAlignment="Center" x:Name="NaoEditavel">
                         <Grid>
-                            <Label Content="Início" 
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Top"/>
+                            <Grid.Background>
+                                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                                    <GradientStop Color="#708AEF" Offset="0"/>
+                                    <GradientStop Color="#5B1094" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Grid.Background>
+
+                            <Label Content="Início" HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"/>
+
+                            <Button x:Name="CreateFlux" Content="Criar novo fluxograma" Background="Transparent" BorderBrush="Black" 
+                                    BorderThickness="1" Padding="10" Width="160" Height="40" Margin="-645, -510, 0, 0">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding  BorderBrush}"
+                                                BorderThickness="{TemplateBinding  BorderThickness}"
+                                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+        
+                            <Button x:Name="LoadFlux" Content="Carregar Fluxograma" Background="Transparent" BorderBrush="Black" 
+                                    BorderThickness="1" Padding="10" Width="150" Height="40" Margin="-640, -380, 0, 0">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding  Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </Grid>
                     </TabItem>
                 </TabControl>

@@ -17,7 +17,7 @@ public class StyleButtonCode
             // Evento de mouse
             button.MouseEnter += (s, e) =>
             {
-                ((Button)s).Background = Brushes.DimGray; // Quando o mouse estiver em cima, muda o Background para DimGray 
+                ((Button)s).Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#7ab3da")); // Quando o mouse estiver em cima, muda o Background para DimGray 
             };
 
             button.MouseLeave += (s, e) =>
