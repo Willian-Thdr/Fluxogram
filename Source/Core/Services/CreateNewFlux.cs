@@ -22,12 +22,18 @@ public static class CreateNewFlux
 
             TabItem novaAba = new TabItem(); // Item que cria nova aba
 
+            TextBlock title = new TextBlock // Define o nome da aba e seu alinhamento
+            {
+                Text = tabName,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
             Button close = new Button // Item que cria botão para fechar aba
             {
-                Content = "X", // Conteúdo do botão
+                Content = "x", // Conteúdo do botão
                 Width = 18, // Largura do botão
                 Height = 18, // Altura do botão
-                Margin = new Thickness(0, 0, 5, 0), // Margem dele em relação ao TabItem
+                Margin = new Thickness(0), // Margem dele em relação ao TabItem
                 Padding = new Thickness(0), // Espaço interno do botão
                 Background = Brushes.Transparent, // Defino a cor do fundo
                 BorderBrush = Brushes.Transparent, // Defino a cor da borda
@@ -40,7 +46,7 @@ public static class CreateNewFlux
             };
 
             // Adiciono os itens ao header (A nova aba e o botão de fechar)
-            header.Children.Add(novaAba);
+            header.Children.Add(title);
             header.Children.Add(close);
 
             // Faço a modificação da aba
