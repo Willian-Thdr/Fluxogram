@@ -15,15 +15,36 @@ public partial class MainWindow : Window
 
         Loaded += (s, e) =>
         {
-            List<Button> buttons = GetAllChildren<Button>(this);
+            List<Button> buttons = GetAllChildrenButton<Button>(this);
+            List<TabItem> tabs = GetAllChildrenTabs<TabItem>(this);
+            List<TabItem> newTabs = GetAllChildrenTab<TabItem>(this);
             new StyleButtonCode(buttons);
+            new RenameTab(newTabs);
 
-            CreateNewFlux.Connect(CreateFlux);
+            CreateNewFlux.Connect(CreateFlux, Abas);
         };
     }
 
-    public static List<T> GetAllChildren<T>(DependencyObject parent)
-    where T :DependencyObject
+    public static List<B> GetAllChildrenButton<B>(DependencyObject parent)
+    where B : DependencyObject
+    {
+        List<B> result = new List<B>();
+
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+
+            if (child is B typedChild)
+                result.Add(typedChild);
+
+            result.AddRange(GetAllChildrenButton<B>(child));
+        }
+
+        return result;
+    }
+
+    public static List<T> GetAllChildrenTabs<T>(DependencyObject parent)
+    where T : DependencyObject
     {
         List<T> result = new List<T>();
 
@@ -34,9 +55,27 @@ public partial class MainWindow : Window
             if (child is T typedChild)
                 result.Add(typedChild);
 
-            result.AddRange(GetAllChildren<T>(child));
+            result.AddRange(GetAllChildrenTabs<T>(child));
         }
 
         return result;
     }
+
+    public static List<T> GetAllChildrenTab<T>(DependencyObject parent)
+    where T : DependencyObject
+    {
+        List<T> result = new List<T>();
+
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+
+            if (child is T typedChild)
+                result.Add(typedChild);
+
+            result.AddRange(GetAllChildrenTab<T>(child));
+        }
+        return result;
+    }
+
 }
