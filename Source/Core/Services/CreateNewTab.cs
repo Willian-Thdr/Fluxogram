@@ -36,12 +36,11 @@ public static class CreateNewTab
 
             // Faço a modificação da aba
             novaAba.Header = header;
-            novaAba.Background = Brushes.White;
-            novaAba.Opacity = 0.5;
+            novaAba.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#207c7c7c"));
             novaAba.BorderBrush = Brushes.Black;
             novaAba.Margin = new Thickness(5, 0, 0, 0);
             novaAba.HorizontalAlignment = HorizontalAlignment.Center;
-            novaAba.Name = idName;
+            novaAba.Name = "MainWindowId";
 
             // Adiciono o conteúdo dentro da janela da aba
             novaAba.Content = new TextBlock
