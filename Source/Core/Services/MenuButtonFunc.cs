@@ -5,7 +5,7 @@ using System.Windows.Threading;
 
 public class MenuButtonFunc
 {
-    public MenuButtonFunc(Button button, Canvas canvas, bool checker, string txt, ColumnDefinition column, double from, double to, Action? onClick, int durationMs = 300)
+    public MenuButtonFunc(Button button, Canvas canvas, bool checker, string txt, ColumnDefinition column, double from, double to, int durationMs = 300)
     {
         int fps = 60;
         int interval = 1000 / fps;
@@ -43,8 +43,7 @@ public class MenuButtonFunc
             {
                 timer.Stop();
                 column.Width = new GridLength(to);
-                AbrirMenu a = new AbrirMenu();
-                a.Function(canvas, checker, onClick);
+                new AbrirMenu(canvas, checker);
             }
         };
 

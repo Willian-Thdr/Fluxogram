@@ -1,12 +1,14 @@
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using System.Diagnostics;
+using System.CodeDom;
 
 namespace Fluxogram.Core.Services;
 
 public static class CreateNewTab
 {
-    public static void Connect(Button button, TabControl abas, List<TabItem> items)
+    public static void Connect(Button button, TabControl abas, bool checker)
     {
         List<TabItem> tabList = new List<TabItem>(); // Listas que receberá todos os ids de todas as abas
         int num = 0; // Numerdor do total de abas
@@ -16,38 +18,56 @@ public static class CreateNewTab
         {
             num++; // Aumento o numerador em 1
             string idName = "Fluxograma_" + num; // Nomeio o id da aba a partir de sua numeração
-            string tabName = "Novo Fluxograma"; // Nomeio a aba a partir de sua numeração
+            string name = "Novo Fluxograma";
 
             TabItem novaAba = new TabItem(); // Item que cria nova aba
 
             TextBlock title = new TextBlock // Define o nome da aba e seu alinhamento
             {
-                Text = tabName,
+                Text = name,
                 VerticalAlignment = VerticalAlignment.Center
             };
 
-            StackPanel header = new StackPanel // Permite colocar o botão de fechar na aba
+            Color color0 = (Color)ColorConverter.ConvertFromString("#5B1094");
+            Color color1 = (Color)ColorConverter.ConvertFromString("#708AEF");
+            LinearGradientBrush brush = new LinearGradientBrush();
+            brush.StartPoint = new Point(0, 0);
+            brush.EndPoint = new Point(1, 1);
+            brush.GradientStops.Add(new GradientStop(color0, 0));
+            brush.GradientStops.Add(new GradientStop(color1, 1));
+
+            Canvas canvas = new Canvas // Permite colocar o botão de fechar na aba
+            {
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                Background = brush
+            };
+
+            StackPanel panel = new StackPanel
             {
                 Orientation = Orientation.Horizontal
             };
 
-            // Adiciono os itens ao header (A nova aba e o botão de fechar)
-            header.Children.Add(title);
+            panel.Children.Add(title);
 
             // Faço a modificação da aba
-            novaAba.Header = header;
+            novaAba.Header = panel;
+            novaAba.Content = canvas;
             novaAba.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#207c7c7c"));
             novaAba.BorderBrush = Brushes.Black;
             novaAba.Margin = new Thickness(5, 0, 0, 0);
             novaAba.HorizontalAlignment = HorizontalAlignment.Center;
-            novaAba.Name = "MainWindowId";
 
-            // Adiciono o conteúdo dentro da janela da aba
-            novaAba.Content = new TextBlock
+            TextBlock text = new TextBlock
             {
                 Text = "Ideias de projeto",
-                Margin = new Thickness(10)
+                FontSize = 24
             };
+
+            Canvas.SetTop(text, 20);
+            Canvas.SetLeft(text, 25);
+
+            canvas.Children.Add(text);
 
             // Adiciono as abas criadas ao TabControl
             abas.Items.Add(novaAba);
@@ -56,7 +76,9 @@ public static class CreateNewTab
             a classe da modificação do nome da aba pra que modifique todos os itens da lista */
             tabList.Add(novaAba);
             new RenameTab(tabList);
-            new CloseTabSystem(abas, header, novaAba);
+            new CloseTabSystem(abas, novaAba, panel);
+
+            StorageBox.Instance.canva = canvas;
         };
     }
 }

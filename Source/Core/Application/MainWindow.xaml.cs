@@ -11,29 +11,13 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent(); // Chamo a classe xaml principal e executo ela
+        var grid = (Grid)canvasRoot.Children[0];
+        var coluna = grid.ColumnDefinitions[0];
         bool check = false;
-        AbrirMenu a = new AbrirMenu();
-
-        MenuButton.Click += (s2, e2) =>
-        {
-            var grid = (Grid)canvasRoot.Children[0];
-            var coluna = grid.ColumnDefinitions[0];
-
-            if (coluna.Width.Value > 0)
-            {
-                new MenuButtonFunc(MenuButton, MainWindowId, true, "<", coluna, coluna.Width.Value, 0, () =>
-                {
-                    new MenuButtonFunc(MenuButton, MainWindowId, false, "≡", coluna, coluna.Width.Value, 220, null);
-                });
-            }
-        };
 
         // Evento que será execultado apenas quando a janela terminar de carregar. Para evitar chash e conflitos
         Loaded += (s, e) =>
         {
-            var grid = (Grid)canvasRoot.Children[0];
-            var coluna = grid.ColumnDefinitions[0];
-
             List<Button> buttons = GetAllChildrenButton<Button>(this); // Crio uma lista para receber todos os botões da interface
             List<TabItem> tabs = GetAllChildrenTab<TabItem>(this);
 
@@ -43,7 +27,24 @@ public partial class MainWindow : Window
             new MenuButtonStyle(MenuButton, check);
 
             // Chamo o método de criar novas abas. (Ele recebe o valor do comando do botão pressionado, O nome do TabControl)
-            CreateNewTab.Connect(CreateFlux, Abas, tabs);
+            CreateNewTab.Connect(CreateFlux, Abas, check);
+        };
+
+        MenuButton.Click += (s2, e2) =>
+        {
+            if (coluna.Width.Value > 0)
+            {
+                check = true;
+                new MenuButtonFunc(MenuButton, MainWindowId, check, "<", coluna, coluna.Width.Value, 0);
+
+                StorageBox.Instance.elementUi.Add(MenuButton);
+                StorageBox.Instance.elementUi.Add(MainWindowId);
+                StorageBox.Instance.checker = check;
+                StorageBox.Instance.something.Add(coluna);
+
+                Canvas canvas = (Canvas)StorageBox.Instance.canva;
+                new AbrirMenu(canvas, check);
+            }
         };
     }
 

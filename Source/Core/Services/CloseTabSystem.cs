@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 public class CloseTabSystem
 {
-    public CloseTabSystem(TabControl abas, StackPanel header, TabItem novaAba)
+    public CloseTabSystem(TabControl abas, TabItem novaAba, StackPanel panel)
     {
         List<TabItem> tabList = new List<TabItem>(); // Listas que receberá todos os ids de todas as abas
         List<TabItem> itemList = new List<TabItem>();
@@ -21,7 +21,7 @@ public class CloseTabSystem
             Cursor = System.Windows.Input.Cursors.Hand // Reconhece quando cursor pass por cima
         };
 
-        header.Children.Add(close);
+        panel.Children.Add(close);
 
         // Comando de fechar determinada aba
         close.Click += (s2, e2) =>
