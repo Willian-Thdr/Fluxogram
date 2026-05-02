@@ -1,16 +1,16 @@
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Diagnostics;
-using System.CodeDom;
 
 namespace Fluxogram.Core.Services;
 
-public static class CreateNewTab
+public class CreateNewTab
 {
-    public static void Connect(Button button, TabControl abas, bool checker)
+    static List<TabItem> tabList = new List<TabItem>(); // Listas que receberá todos os ids de todas as abas
+    static List<Canvas>? canvaList;
+
+    public static void Connect(Button button, TabControl abas)
     {
-        List<TabItem> tabList = new List<TabItem>(); // Listas que receberá todos os ids de todas as abas
         int num = 0; // Numerdor do total de abas
 
         // Evento de quando o botão de criar aba é clicado
@@ -67,7 +67,9 @@ public static class CreateNewTab
             Canvas.SetTop(text, 20);
             Canvas.SetLeft(text, 25);
 
+            canvaList = new List<Canvas>();
             canvas.Children.Add(text);
+            canvaList.Add(canvas);
 
             // Adiciono as abas criadas ao TabControl
             abas.Items.Add(novaAba);
@@ -78,7 +80,10 @@ public static class CreateNewTab
             new RenameTab(tabList);
             new CloseTabSystem(abas, novaAba, panel);
 
-            StorageBox.Instance.canva = canvas;
+            foreach (Canvas canvaItem in canvaList)
+            {
+                StorageBox.Instance.canvas.Add(canvaItem);
+            }
         };
     }
 }

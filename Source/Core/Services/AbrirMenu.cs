@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Drawing.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -6,12 +7,7 @@ using Fluxogram.Core.Services;
 
 public class AbrirMenu
 {
-    public AbrirMenu(Canvas canvas, bool checker)
-    {
-        Function(canvas, checker);
-    }
-
-    public void Function(Canvas canvas, bool checker)
+    public void Function(Canvas? canvas, bool checker)
     {
         Button? antigo = canvas.Children.OfType<Button>().FirstOrDefault(b => b.Tag?.ToString() == "OpenMenuButton");
         Action? onClick = StorageBox.Instance.onClick;
@@ -33,6 +29,7 @@ public class AbrirMenu
             Tag = "OpenMenuButton"
         };
 
+
         open.MouseEnter += (s, e) =>
         {
             open.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#207ab3da"));
@@ -51,13 +48,13 @@ public class AbrirMenu
 
             Button button = (Button)StorageBox.Instance.elementUi[0];
             Canvas canva = (Canvas)StorageBox.Instance.elementUi[1];
+            List<Canvas>? canva2 = StorageBox.Instance.canvas;
 
             bool check = false;
-            StorageBox.Instance.checker = check;
 
             ColumnDefinition coluna = (ColumnDefinition)StorageBox.Instance.something[0];
 
-            new MenuButtonFunc(button, canva, check, "≡", coluna, 0, 220);
+            new MenuButtonFunc(button, canva, canva2, check, "≡", coluna, 0, 220);
         };
 
         Canvas.SetTop(open, 10);

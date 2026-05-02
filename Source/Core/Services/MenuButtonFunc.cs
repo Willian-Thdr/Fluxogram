@@ -2,10 +2,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Fluxogram.Core.Services;
 
 public class MenuButtonFunc
 {
-    public MenuButtonFunc(Button button, Canvas canvas, bool checker, string txt, ColumnDefinition column, double from, double to, int durationMs = 300)
+    public MenuButtonFunc(Button button, Canvas canvas, List<Canvas>? canva2, bool checker, string txt, ColumnDefinition column, double from, double to, int durationMs = 300)
     {
         int fps = 60;
         int interval = 1000 / fps;
@@ -43,7 +44,17 @@ public class MenuButtonFunc
             {
                 timer.Stop();
                 column.Width = new GridLength(to);
-                new AbrirMenu(canvas, checker);
+                AbrirMenu AM = new AbrirMenu();
+                AM.Function(canvas, checker);
+
+                if (canva2 != null)
+                {
+                    foreach (Canvas canva in canva2)
+                    {
+                        AbrirMenuSubTabs AMST = new AbrirMenuSubTabs();
+                        AMST.Function(canva, checker);
+                    }
+                }
             }
         };
 

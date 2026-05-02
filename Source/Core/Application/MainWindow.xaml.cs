@@ -8,6 +8,8 @@ namespace Fluxogram.Source.Application;
 
 public partial class MainWindow : Window
 {
+    static List<Canvas>? canva;
+
     public MainWindow()
     {
         InitializeComponent(); // Chamo a classe xaml principal e executo ela
@@ -18,6 +20,13 @@ public partial class MainWindow : Window
         // Evento que será execultado apenas quando a janela terminar de carregar. Para evitar chash e conflitos
         Loaded += (s, e) =>
         {
+            StorageBox.Instance.elementUi.Add(MenuButton);
+            StorageBox.Instance.elementUi.Add(MainWindowId);
+            StorageBox.Instance.checker = check;
+            StorageBox.Instance.something.Add(coluna);
+            canva = StorageBox.Instance.canvas;
+
+
             List<Button> buttons = GetAllChildrenButton<Button>(this); // Crio uma lista para receber todos os botões da interface
             List<TabItem> tabs = GetAllChildrenTab<TabItem>(this);
 
@@ -27,7 +36,7 @@ public partial class MainWindow : Window
             new MenuButtonStyle(MenuButton, check);
 
             // Chamo o método de criar novas abas. (Ele recebe o valor do comando do botão pressionado, O nome do TabControl)
-            CreateNewTab.Connect(CreateFlux, Abas, check);
+            CreateNewTab.Connect(CreateFlux, Abas);
         };
 
         MenuButton.Click += (s2, e2) =>
@@ -35,15 +44,10 @@ public partial class MainWindow : Window
             if (coluna.Width.Value > 0)
             {
                 check = true;
-                new MenuButtonFunc(MenuButton, MainWindowId, check, "<", coluna, coluna.Width.Value, 0);
 
-                StorageBox.Instance.elementUi.Add(MenuButton);
-                StorageBox.Instance.elementUi.Add(MainWindowId);
                 StorageBox.Instance.checker = check;
-                StorageBox.Instance.something.Add(coluna);
 
-                Canvas canvas = (Canvas)StorageBox.Instance.canva;
-                new AbrirMenu(canvas, check);
+                new MenuButtonFunc(MenuButton, MainWindowId, canva, check, "<", coluna, coluna.Width.Value, 0);
             }
         };
     }
