@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using Fluxogram.Core.Services;
 using Fluxogram.UI.Helper;
@@ -25,7 +26,6 @@ public partial class MainWindow : Window
             StorageBox.Instance.checker = check;
             StorageBox.Instance.something.Add(coluna);
             canva = StorageBox.Instance.canvas;
-
 
             List<Button> buttons = GetAllChildrenButton<Button>(this); // Crio uma lista para receber todos os botões da interface
             List<TabItem> tabs = GetAllChildrenTab<TabItem>(this);
@@ -90,5 +90,13 @@ public partial class MainWindow : Window
         }
 
         return result;
+    }
+
+    private void AreaMove(object? sender, MouseEventArgs e)
+    {
+        Point mouse = e.GetPosition(MainWindowId);
+
+        Canvas.SetLeft(MouseGlow, mouse.X - MouseGlow.Width / 2);
+        Canvas.SetTop(MouseGlow, mouse.Y - MouseGlow.Height / 2);
     }
 }

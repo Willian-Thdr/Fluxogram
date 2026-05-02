@@ -11,5 +11,5 @@ public class StorageBox
     public bool checker { get; set; }
     public List<object> doubles { get; set; } = new();
     public Action? onClick { get; set; }
-    public List<Canvas>? canvas { get; set; } = new();
+    public List<Canvas> canvas { get; set; } = new();
 }

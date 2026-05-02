@@ -3,5 +3,7 @@
         "xaml": "xml"
     },
     "emmet.triggerExpansionOnTab": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true
 }

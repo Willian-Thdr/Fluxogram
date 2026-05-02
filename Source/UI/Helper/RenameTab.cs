@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -28,6 +29,8 @@ public class RenameTab
                 TextBox editor = new TextBox
                 {
                     Text = title.Text,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    FontSize = 14,
                     Width = 120
                 };
 
@@ -47,6 +50,8 @@ public class RenameTab
                     if (e2.Key == Key.Enter)
                     {
                         title.Text = editor.Text;
+                        title.HorizontalAlignment = editor.HorizontalAlignment;
+                        title.FontSize = editor.FontSize;
 
                         header.Children.Remove(editor);
                         header.Children.Insert(index, title);

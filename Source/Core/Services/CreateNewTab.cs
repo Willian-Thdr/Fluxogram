@@ -1,6 +1,10 @@
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Configuration;
+using Microsoft.VisualBasic;
+using System.Windows.Shapes;
 
 namespace Fluxogram.Core.Services;
 
@@ -8,7 +12,6 @@ public class CreateNewTab
 {
     static List<TabItem> tabList = new List<TabItem>(); // Listas que receberá todos os ids de todas as abas
     static List<Canvas>? canvaList;
-
     public static void Connect(Button button, TabControl abas)
     {
         int num = 0; // Numerdor do total de abas
@@ -19,6 +22,7 @@ public class CreateNewTab
             num++; // Aumento o numerador em 1
             string idName = "Fluxograma_" + num; // Nomeio o id da aba a partir de sua numeração
             string name = "Novo Fluxograma";
+            var element = (FrameworkElement)s;
 
             TabItem novaAba = new TabItem(); // Item que cria nova aba
 
@@ -28,11 +32,14 @@ public class CreateNewTab
                 VerticalAlignment = VerticalAlignment.Center
             };
 
-            Color color0 = (Color)ColorConverter.ConvertFromString("#5B1094");
-            Color color1 = (Color)ColorConverter.ConvertFromString("#708AEF");
+            Color color0 = (Color)ColorConverter.ConvertFromString("#708AEF");
+            Color color1 = (Color)ColorConverter.ConvertFromString("#5B1094");
+
             LinearGradientBrush brush = new LinearGradientBrush();
+
             brush.StartPoint = new Point(0, 0);
             brush.EndPoint = new Point(1, 1);
+
             brush.GradientStops.Add(new GradientStop(color0, 0));
             brush.GradientStops.Add(new GradientStop(color1, 1));
 
@@ -64,11 +71,35 @@ public class CreateNewTab
                 FontSize = 24
             };
 
+            Ellipse mouseGlow = new Ellipse
+            {
+                Width = 40,
+                Height = 40,
+                IsHitTestVisible = false,
+                Fill = new RadialGradientBrush
+                {
+                    GradientStops =
+                    {
+                        new GradientStop((Color)ColorConverter.ConvertFromString("#20FFFFFF"), 0),
+                        new GradientStop((Color)ColorConverter.ConvertFromString("#01FFFFFF"), 1)
+                    }
+                }
+            };
+
+            canvas.MouseMove += (s2, e2) =>
+            {
+                Point mouse = e2.GetPosition(canvas);
+
+                Canvas.SetLeft(mouseGlow, mouse.X - mouseGlow.Width / 2);
+                Canvas.SetTop(mouseGlow, mouse.Y - mouseGlow.Height / 2);
+            };
+
             Canvas.SetTop(text, 20);
             Canvas.SetLeft(text, 25);
 
             canvaList = new List<Canvas>();
             canvas.Children.Add(text);
+            canvas.Children.Add(mouseGlow);
             canvaList.Add(canvas);
 
             // Adiciono as abas criadas ao TabControl
