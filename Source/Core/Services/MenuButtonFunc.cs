@@ -51,8 +51,7 @@ public class MenuButtonFunc
                 {
                     foreach (Canvas canva in canva2)
                     {
-                        AbrirMenuSubTabs AMST = new AbrirMenuSubTabs();
-                        AMST.Function(canva, checker);
+                        AbrirMenuSubTabs.Function(canva, StorageBox.Instance.checker);
                     }
                 }
             }

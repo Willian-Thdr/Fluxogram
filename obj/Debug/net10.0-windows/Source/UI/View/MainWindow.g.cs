@@ -116,7 +116,7 @@ namespace Fluxogram.Source.Application {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Fluxogram;V1.0.0.0;component/source/ui/view/mainwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Fluxogram;component/source/ui/view/mainwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Source\UI\View\MainWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

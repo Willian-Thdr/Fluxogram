@@ -18,6 +18,18 @@ public partial class MainWindow : Window
         var coluna = grid.ColumnDefinitions[0];
         bool check = false;
 
+        MenuButton.Click += (s2, e2) =>
+        {
+            if (coluna.Width.Value > 0)
+            {
+                check = true;
+
+                StorageBox.Instance.checker = check;
+
+                new MenuButtonFunc(MenuButton, MainWindowId, canva, check, "<", coluna, coluna.Width.Value, 0);
+            }
+        };
+
         // Evento que será execultado apenas quando a janela terminar de carregar. Para evitar chash e conflitos
         Loaded += (s, e) =>
         {
@@ -32,23 +44,11 @@ public partial class MainWindow : Window
 
             // Chamo os métodos
             new StyleButtonCode(buttons);
-            new RenameTab(tabs);
+            RenameTab.Rename(tabs);
             new MenuButtonStyle(MenuButton, check);
 
             // Chamo o método de criar novas abas. (Ele recebe o valor do comando do botão pressionado, O nome do TabControl)
             CreateNewTab.Connect(CreateFlux, Abas);
-        };
-
-        MenuButton.Click += (s2, e2) =>
-        {
-            if (coluna.Width.Value > 0)
-            {
-                check = true;
-
-                StorageBox.Instance.checker = check;
-
-                new MenuButtonFunc(MenuButton, MainWindowId, canva, check, "<", coluna, coluna.Width.Value, 0);
-            }
         };
     }
 
