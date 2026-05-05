@@ -6,10 +6,6 @@ public class StorageBox
 
     public static StorageBox Instance => _instance ??= new StorageBox();
 
-    public List<object> elementUi { get; set; } = new();
     public List<object> something { get; set; } = new();
-    public bool checker { get; set; }
-    public List<object> doubles { get; set; } = new();
     public Action? onClick { get; set; }
-    public List<Canvas> canvas { get; set; } = new();
 }

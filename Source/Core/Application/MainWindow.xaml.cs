@@ -9,11 +9,10 @@ namespace Fluxogram.Source.Application;
 
 public partial class MainWindow : Window
 {
-    static List<Canvas>? canva;
-
     public MainWindow()
     {
         InitializeComponent(); // Chamo a classe xaml principal e executo ela
+
         var grid = (Grid)canvasRoot.Children[0];
         var coluna = grid.ColumnDefinitions[0];
         bool check = false;
@@ -23,21 +22,22 @@ public partial class MainWindow : Window
             if (coluna.Width.Value > 0)
             {
                 check = true;
+                StorageBoxMainWindow.Instance.checker = check;
+                StorageBoxMenuLateral.Instance.canvas.Add(MainWindowId);
 
-                StorageBox.Instance.checker = check;
+                ShowButton.getCanva1(check);
 
-                new MenuButtonFunc(MenuButton, MainWindowId, canva, check, "<", coluna, coluna.Width.Value, 0);
+                MenuAction(MenuButton, coluna, coluna.Width.Value, 0);
+                StorageBoxMainWindow.Instance.doubles = 0;
             }
         };
 
         // Evento que será execultado apenas quando a janela terminar de carregar. Para evitar chash e conflitos
         Loaded += (s, e) =>
         {
-            StorageBox.Instance.elementUi.Add(MenuButton);
-            StorageBox.Instance.elementUi.Add(MainWindowId);
-            StorageBox.Instance.checker = check;
-            StorageBox.Instance.something.Add(coluna);
-            canva = StorageBox.Instance.canvas;
+            StorageBoxMainWindow.Instance.button = MenuButton;
+            StorageBoxMainWindow.Instance.mainCanva = MainWindowId;
+            StorageBoxMainWindow.Instance.coluna = coluna;
 
             List<Button> buttons = GetAllChildrenButton<Button>(this); // Crio uma lista para receber todos os botões da interface
             List<TabItem> tabs = GetAllChildrenTab<TabItem>(this);
@@ -98,5 +98,10 @@ public partial class MainWindow : Window
 
         Canvas.SetLeft(MouseGlow, mouse.X - MouseGlow.Width / 2);
         Canvas.SetTop(MouseGlow, mouse.Y - MouseGlow.Height / 2);
+    }
+
+    public static void MenuAction(Button MenuButton, ColumnDefinition coluna, double colunaWV, double to)
+    {
+        new MenuButtonFunc(MenuButton, "<", coluna, colunaWV, to);
     }
 }

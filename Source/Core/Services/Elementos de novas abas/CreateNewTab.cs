@@ -15,6 +15,7 @@ public class CreateNewTab
     public static void Connect(Button button, TabControl abas)
     {
         int num = 0; // Numerdor do total de abas
+        ColumnDefinition? coluna = StorageBoxMenuLateral.Instance.coluna as ColumnDefinition;
 
         // Evento de quando o botão de criar aba é clicado
         button.Click += (s, e) =>
@@ -24,7 +25,14 @@ public class CreateNewTab
             string name = "Novo Fluxograma";
             var element = (FrameworkElement)s;
 
-            TabItem novaAba = new TabItem(); // Item que cria nova aba
+            TabItem novaAba = new TabItem()
+            {
+                Name = idName,
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#207c7c7c")),
+                BorderBrush = Brushes.Black,
+                Margin = new Thickness(5, 0, 0, 0),
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
 
             TextBlock title = new TextBlock // Define o nome da aba e seu alinhamento
             {
@@ -35,10 +43,11 @@ public class CreateNewTab
             Color color0 = (Color)ColorConverter.ConvertFromString("#708AEF");
             Color color1 = (Color)ColorConverter.ConvertFromString("#5B1094");
 
-            LinearGradientBrush brush = new LinearGradientBrush();
-
-            brush.StartPoint = new Point(0, 0);
-            brush.EndPoint = new Point(1, 1);
+            LinearGradientBrush brush = new LinearGradientBrush()
+            {
+                StartPoint = new Point(0, 0),
+                EndPoint = new Point(1, 1),
+            };
 
             brush.GradientStops.Add(new GradientStop(color0, 0));
             brush.GradientStops.Add(new GradientStop(color1, 1));
@@ -59,12 +68,7 @@ public class CreateNewTab
 
             // Faço a modificação da aba
             novaAba.Header = panel;
-            novaAba.Name = idName;
             novaAba.Content = canvas;
-            novaAba.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#207c7c7c"));
-            novaAba.BorderBrush = Brushes.Black;
-            novaAba.Margin = new Thickness(5, 0, 0, 0);
-            novaAba.HorizontalAlignment = HorizontalAlignment.Center;
 
             TextBlock text = new TextBlock
             {
@@ -97,7 +101,12 @@ public class CreateNewTab
 
             canvas.Children.Add(text);
 
-            StorageBox.Instance.canvas.Add(canvas);
+            StorageBoxMenuLateral.Instance.canvas.Add(canvas);
+
+            if (StorageBoxMainWindow.Instance.doubles == 0)
+            {
+                ShowButton.getCanva1(StorageBoxMainWindow.Instance.checker);
+            }
 
             // Adiciono as abas criadas ao TabControl
             abas.Items.Add(novaAba);
