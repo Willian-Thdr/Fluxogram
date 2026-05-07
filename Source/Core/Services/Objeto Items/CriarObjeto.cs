@@ -3,13 +3,16 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
+using Microsoft.VisualBasic;
+using System.DirectoryServices;
 
 public class CriarObjeto
 {
     private static int num;
     private static double y;
     private static double x;
+    private static string? nome;
+    private static Grid? objetoInicial;
 
     public static void Connect(Canvas canva)
     {
@@ -17,7 +20,8 @@ public class CriarObjeto
 
         Grid vis = new Grid
         {
-            Width = 160,
+            Name = "Objeto_" + num,
+            Width = 180,
             Height = 28
         };
 
@@ -48,16 +52,14 @@ public class CriarObjeto
         Canvas.SetTop(vis, mouse.Y - vis.ActualHeight / 2);
         Canvas.SetLeft(vis, mouse.X - vis.Width / 2);
 
+        Panel.SetZIndex(vis, 1);
+
         MoveObject.Move(vis, canva);
 
         ContextMenu objMenu = new ContextMenu();
 
         MenuItem item1 = new MenuItem();
         item1.Header = "Renomear";
-        item1.Click += (s, e) =>
-        {
-            ObjectOptions.Connections(vis, txt);
-        };
 
         MenuItem item2 = new MenuItem();
         item2.Header = "Mudar cor";
@@ -66,13 +68,43 @@ public class CriarObjeto
         item3.Header = "Mudar formato";
 
         MenuItem item4 = new MenuItem();
-        item4.Header = "Criar linha de fluxo";
+        item4.Header = "Criar percurso";
 
         MenuItem item5 = new MenuItem();
         item5.Header = "Recolher conteúdo";
 
         MenuItem item6 = new MenuItem();
         item6.Header = "Expandir conteúdo";
+
+        item1.Click += (s, e) =>
+        {
+            ObjectOptions.Connections(vis, txt);
+        };
+
+        item4.Click += (s, e) =>
+        {
+            if (objetoInicial == null)
+            {
+                objetoInicial = vis;
+            }
+            else
+            {
+                Grid objetoFinal = vis;
+
+                Point start = Center(objetoInicial);
+                Point end = Center(objetoFinal);
+
+                Path linha = CriarProgresso.Create(start, end);
+
+                Panel.SetZIndex(linha, -1);
+
+                canva.Children.Add(linha);
+
+                StorageConnections.Connections.Add(new Connection(objetoInicial, objetoFinal, linha));
+
+                objetoInicial = null;
+            }
+        };
 
         item5.Click += (s, e) =>
         {
@@ -107,5 +139,16 @@ public class CriarObjeto
         ObjectOptions.Connections(vis, txt);
 
         canva.Children.Add(vis);
+    }
+
+    public static Point Center(Grid obj)
+    {
+        double left = Canvas.GetLeft(obj);
+        double top = Canvas.GetTop(obj);
+
+        double Width = obj.ActualWidth;
+        double Height = obj.ActualHeight;
+
+        return new Point(left + Width / 2, top + Height / 2);
     }
 }

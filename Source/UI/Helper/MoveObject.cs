@@ -33,6 +33,7 @@ public class MoveObject
 
             Canvas.SetTop(grid, mouse.Y - grid.ActualHeight / 2);
             Canvas.SetLeft(grid, mouse.X - grid.Width / 2);
+            UpdateConnections(grid);
         };
 
         grid.MouseLeftButtonUp += (s, e) =>
@@ -40,5 +41,19 @@ public class MoveObject
             dragging = false;
             grid.ReleaseMouseCapture();
         };
+    }
+
+    public static void UpdateConnections(Grid grid)
+    {
+        foreach (var conn in StorageConnections.Connections)
+        {
+            if (conn.Start == grid || conn.End == grid)
+            {
+                Point start = CriarObjeto.Center(conn.Start);
+                Point end = CriarObjeto.Center(conn.End);
+
+                conn.Line.Data = CriarProgresso.Create(start, end).Data;
+            }
+        }
     }
 }
