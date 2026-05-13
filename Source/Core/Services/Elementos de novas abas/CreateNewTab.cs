@@ -83,6 +83,7 @@ public class CreateNewTab
             Canvas.SetLeft(text, 25);
 
             tabList.Add(novaAba);
+            StorageBox.Instance.titles.Add(title);
             new CloseTabSystem(abas, novaAba, panel);
 
             canvaList = new List<Canvas>();
@@ -92,7 +93,7 @@ public class CreateNewTab
             item.Header = "Renomear aba";
             item.Click += (s, e) =>
             {
-                RenameTab.Rename(tabList);
+                RenameTab.Rename(novaAba);
             };
 
             menu.Items.Add(item);
@@ -110,7 +111,7 @@ public class CreateNewTab
 
             // Adiciono as abas criadas ao TabControl
             abas.Items.Add(novaAba);
-
+            StorageBox.Instance.verify = true;
         };
     }
 }

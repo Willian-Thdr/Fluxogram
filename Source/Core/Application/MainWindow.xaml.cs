@@ -32,6 +32,16 @@ public partial class MainWindow : Window
             }
         };
 
+        SaveButton.Click += (s3, e3) =>
+        {
+            int quant = Abas.Items.Count;
+
+            if (StorageBox.Instance.verify == true && quant >= 2)
+            {
+                Salvar.OnSave();
+            }
+        };
+
         // Evento que será execultado apenas quando a janela terminar de carregar. Para evitar chash e conflitos
         Loaded += (s, e) =>
         {
@@ -44,11 +54,19 @@ public partial class MainWindow : Window
 
             // Chamo os métodos
             new StyleButtonCode(buttons);
-            RenameTab.Rename(tabs);
+            foreach (TabItem tab in tabs)
+            {
+                RenameTab.Rename(tab);
+            }
             new MenuButtonStyle(MenuButton, check);
 
             // Chamo o método de criar novas abas. (Ele recebe o valor do comando do botão pressionado, O nome do TabControl)
             CreateNewTab.Connect(CreateFlux, Abas);
+
+            if (Abas.Items.Count == 1)
+            {
+                StorageBox.Instance.verify = false;
+            }
         };
     }
 

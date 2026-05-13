@@ -9,6 +9,7 @@ public class StorageBoxMainWindow
     public List<Canvas>? canva { get; set; } = new();
     public Canvas? mainCanva { get; set; }
     public Button? button { get; set; }
+    public Button? salveButton { get; set; }
     public double doubles { get; set; }
     public bool checker { get; set; }
     public ColumnDefinition? coluna { get; set; }

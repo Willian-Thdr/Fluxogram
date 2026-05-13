@@ -6,6 +6,6 @@ public class StorageBox
 
     public static StorageBox Instance => _instance ??= new StorageBox();
 
-    public List<object> something { get; set; } = new();
-    public Action? onClick { get; set; }
+    public bool verify { get; set; }
+    public List<TextBlock> titles { get; set; } = new();
 }

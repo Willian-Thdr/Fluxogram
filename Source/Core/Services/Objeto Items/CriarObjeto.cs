@@ -9,9 +9,6 @@ using System.DirectoryServices;
 public class CriarObjeto
 {
     private static int num;
-    private static double y;
-    private static double x;
-    private static string? nome;
     private static Grid? objetoInicial;
 
     public static void Connect(Canvas canva)

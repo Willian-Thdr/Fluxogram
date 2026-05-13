@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Fluxogram")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7454b0dd5bf12b299576fdf5bf4ad9f9bd51657f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05c20d908835f59a8ad2ccd8dc3bb590d470d45b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Fluxogram")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Fluxogram")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
