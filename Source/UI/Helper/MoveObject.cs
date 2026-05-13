@@ -49,8 +49,8 @@ public class MoveObject
         {
             if (conn.Start == grid || conn.End == grid)
             {
-                Point start = CriarObjeto.Center(conn.Start);
-                Point end = CriarObjeto.Center(conn.End);
+                Point start = CriarObjeto.RightSide(conn.Start);
+                Point end = CriarObjeto.LeftSide(conn.End);
 
                 conn.Line.Data = CriarProgresso.Create(start, end).Data;
             }

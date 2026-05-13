@@ -91,8 +91,8 @@ public class CriarObjeto
             {
                 Grid objetoFinal = vis;
 
-                Point start = Center(objetoInicial);
-                Point end = Center(objetoFinal);
+                Point start = RightSide(objetoInicial);
+                Point end = LeftSide(objetoFinal);
 
                 Path linha = CriarProgresso.Create(start, end);
 
@@ -141,14 +141,26 @@ public class CriarObjeto
         canva.Children.Add(vis);
     }
 
-    public static Point Center(Grid obj)
+    public static Point RightSide(Grid obj)
     {
         double left = Canvas.GetLeft(obj);
         double top = Canvas.GetTop(obj);
 
-        double Width = obj.ActualWidth;
-        double Height = obj.ActualHeight;
+        return new Point(
+            left + obj.ActualWidth,
+            top + obj.ActualHeight / 2
+        );
+    }
 
-        return new Point(left + Width / 2, top + Height / 2);
+    public static Point LeftSide(Grid obj)
+    {
+        double left = Canvas.GetLeft(obj);
+        double top = Canvas.GetTop(obj);
+
+
+        return new Point(
+            left,
+            top + obj.ActualHeight / 2
+        );
     }
 }
