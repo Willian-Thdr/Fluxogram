@@ -76,6 +76,9 @@ public class CriarObjeto
         MenuItem item6 = new MenuItem();
         item6.Header = "Expandir conteúdo";
 
+        MenuItem item7 = new MenuItem();
+        item7.Header = "Deletar item";
+
         item1.Click += (s, e) =>
         {
             ObjectOptions.Connections(vis, txt);
@@ -120,10 +123,16 @@ public class CriarObjeto
             objMenu.Items.Add(item5);
         };
 
+        item7.Click += (s, e) =>
+        {
+            DelObjects.Delete(canva, vis);
+        };
+
         objMenu.Items.Add(item1);
         objMenu.Items.Add(item2);
         objMenu.Items.Add(item3);
         objMenu.Items.Add(item4);
+        objMenu.Items.Add(item7);
 
         if (double.IsNaN(vis.Height))
         {
